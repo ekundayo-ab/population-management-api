@@ -40,8 +40,11 @@
     "start": "node lib/index.js",
     "start-dev": "nodemon --exec babel-node src/index.js",
     "db-seed": "sequelize db:seed:all",
-    "db-reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && npm run db-seed",
-    "test": "NODE_ENV=test lab tests -T lab-babel -v -L -C -l"
+    "db-drop": "sequelize db:drop",
+    "db-create": "sequelize db:create",
+    "db-create-test": "NODE_ENV=test sequelize db:create",
+    "db-reset": "npm run db-drop && npm run db-create && sequelize db:migrate",
+    "test": "NODE_ENV=test lab tests -T lab-babel -v -C -l"
   },
   "author": "",
   "license": "ISC"

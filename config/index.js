@@ -12,11 +12,12 @@ module.exports = {
     operatorsAliases: false
   },
   test: {
-    username: 'root',
-    password: null,
-    database: 'database_test',
+    username: process.env.TEST_DB_USER,
+    password: process.env.TEST_DB_PASS,
+    database: process.env.TEST_DB_NAME,
     host: '127.0.0.1',
-    dialect: 'mysql'
+    dialect: 'postgres',
+    operatorsAliases: false
   },
   production: {
     username: 'root',

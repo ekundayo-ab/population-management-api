@@ -17,6 +17,9 @@ An API that models sending and receiving of messages between provided contacts.
 - To build for production do `npm run build`
 
 ### Tests
+Ensure the test database config is added to your env file and create
+the test database by runnning `npm run db-create-test` in the project directory
+on the terminal.
 - To run tests do `npm test` or `npm run test`
 
 ### API Endpoints

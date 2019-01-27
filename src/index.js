@@ -14,7 +14,7 @@ import db from './models';
 
 dotenv.config();
 
-export const server = new Hapi.Server({
+const server = new Hapi.Server({
   port: process.env.PORT || 8000,
   routes: {
     cors: true,
@@ -92,8 +92,11 @@ process.on('unhandledRejection', (err) => {
   process.exit(1);
 });
 
-init();
+if (process.env.NODE_ENV !== 'test') {
+  init();
+}
 
-export default {
-  server
+export {
+  server,
+  init
 };
