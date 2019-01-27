@@ -7,7 +7,7 @@ import lout from 'lout';
 import inert from 'inert';
 import vision from 'vision';
 import path from 'path';
-import hapiSanitize from 'hapi-sanitize-payload';
+import disinfect from 'disinfect';
 import routes from './routes';
 import { validationErrorParser } from './util/parser';
 import db from './models';
@@ -42,6 +42,14 @@ const init = async () => {
     { plugin: inert },
     { plugin: vision },
     {
+      plugin: disinfect,
+      options: {
+        disinfectQuery: true,
+        disinfectParams: true,
+        disinfectPayload: true
+      }
+    },
+    {
       plugin: hapiSequelize,
       options: [
         {
@@ -53,8 +61,7 @@ const init = async () => {
           forceSync: false
         },
       ],
-    },
-    { plugin: hapiSanitize, options: { enabled: true } }
+    }
   ]);
 
   server.ext({

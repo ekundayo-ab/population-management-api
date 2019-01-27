@@ -26,6 +26,7 @@ Request type  | Endpoint                                    | Action
 --------------|---------------------------------------------|--------------------------------------------------
 GET           | /api/countries                              | Get all countries location
 POST          | /api/countries                              | Create a new country location
+DELETE        | /api/countries                              | Delete a country location data
 POST          | /api/countries/id/states                    | Create a new state location
 GET           | /api/countries                              | List all Country locations with their respective State locations including population data
 GET           | /api/states                                 | List all States locations with their respective LGAs all including population data
