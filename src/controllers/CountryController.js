@@ -27,7 +27,9 @@ export default class CountryController {
 
   static async deleteCountry(req) {
     try {
-      await Country.destroy({ where: { id: req.params.id } });
+      const deletionResult = await Country.destroy({ where: { id: req.params.id } });
+      if (!deletionResult) return Boom.notFound('No such country exists');
+
       return 'Country successfully deleted.';
     } catch (error) {
       throw Boom.internal(error);

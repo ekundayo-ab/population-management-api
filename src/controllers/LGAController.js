@@ -105,7 +105,9 @@ export default class LGAController {
 
   static async deleteLGA(req) {
     try {
-      await LGA.destroy({ where: { id: req.params.id } });
+      const deletionResult = await LGA.destroy({ where: { id: req.params.id } });
+      if (!deletionResult) return Boom.notFound('No such LGA exists');
+
       return 'State successfully deleted.';
     } catch (error) {
       throw Boom.internal(error);

@@ -40,7 +40,9 @@ export default class StateController {
 
   static async deleteState(req) {
     try {
-      await State.destroy({ where: { id: req.params.id } });
+      const deletionResult = await State.destroy({ where: { id: req.params.id } });
+      if (!deletionResult) return Boom.notFound('No such state exists');
+
       return 'State successfully deleted.';
     } catch (error) {
       throw Boom.internal(error);
