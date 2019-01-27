@@ -28,7 +28,7 @@ const routes = [
     method: 'GET',
     options: {
       handler: getAllCountries,
-      description: 'Get all countries with their respective states population data',
+      description: 'Get all countries with associated states and LGAs population data',
     }
   },
   {
@@ -39,7 +39,7 @@ const routes = [
       validate: {
         payload: validateCountry
       },
-      description: 'Add a country location',
+      description: 'Add a new country location',
     }
   },
   {
@@ -58,7 +58,7 @@ const routes = [
     method: 'DELETE',
     options: {
       handler: deleteCountry,
-      description: 'Delete a country population data',
+      description: 'Delete a country and associated states and LGAs',
     }
   },
   {
@@ -66,7 +66,7 @@ const routes = [
     method: 'GET',
     options: {
       handler: getAllStates,
-      description: 'Get all states',
+      description: 'Get all states with associated LGAs population data',
       notes: 'Returns all states in the database with their respective LGAs'
     }
   },
@@ -78,7 +78,7 @@ const routes = [
       validate: {
         payload: validateState
       },
-      description: 'Add a states location',
+      description: 'Create a new state location associated with a country',
     }
   },
   {
@@ -89,7 +89,7 @@ const routes = [
       validate: {
         payload: validateState
       },
-      description: 'Update a states location',
+      description: 'Update a state\'s name only',
     }
   },
   {
@@ -97,7 +97,7 @@ const routes = [
     method: 'DELETE',
     options: {
       handler: deleteState,
-      description: 'Delete a state population data',
+      description: 'Delete a state and associated LGAs',
     }
   },
   {
@@ -105,8 +105,7 @@ const routes = [
     method: 'GET',
     options: {
       handler: getAllLGAs,
-      description: 'Get all LGAs',
-      notes: 'Returns all LGAs in the database with their associated states'
+      description: 'List all LGA locations with their population data including their states and country'
     }
   },
   {
@@ -117,7 +116,7 @@ const routes = [
       validate: {
         payload: validateLGA
       },
-      description: 'Add an LGA to a state with its population data',
+      description: 'Create a new LGA location with population data',
     }
   },
   {
@@ -128,7 +127,7 @@ const routes = [
       validate: {
         payload: validateUpdateLGA
       },
-      description: 'Update an LGA of a state with its population data',
+      description: 'Update an LGA location\'s population data',
     }
   },
   {
@@ -136,7 +135,7 @@ const routes = [
     method: 'DELETE',
     options: {
       handler: deleteLGA,
-      description: 'Delete a state population data',
+      description: 'Delete an LGA location\'s with their population data',
     }
   },
 ];

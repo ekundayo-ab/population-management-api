@@ -40,7 +40,7 @@ PATCH         | /api/states/id                              | Update a state's n
 DELETE        | /api/states/id                              | Delete a state and associated LGAs
 
 **LGAs**
-POST          | /api/states/id/lgas                         | Create a new LGA location with population data
 GET           | /api/lgas                                   | List all LGA locations with their population data including their states and country
+POST          | /api/states/id/lgas                         | Create a new LGA location with population data
 PATCH         | /api/lgas/id                                | Update an LGA location's population data
 DELETE        | /api/lgas/id                                | Delete an LGA location's with their population data
