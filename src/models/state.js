@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   State.associate = (models) => {
     State.belongsTo(models.Country, {
       onDelete: 'CASCADE',
-      as: 'state',
+      as: 'country',
       foreignKey: 'countryId'
     });
 

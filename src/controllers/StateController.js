@@ -1,15 +1,25 @@
 import Boom from 'boom';
 import models from '../models';
+import { addTotalField } from '../util/dbHelpers';
 
 const { Country, State, LGA } = models;
 
 export default class StateController {
   static async getAllStates() {
-    const states = await State.findAll({
-      include: [{ model: LGA, as: 'lgas', required: false }],
-      order: [['id', 'ASC']],
-    });
-    return states;
+    try {
+      const states = await State.findAll({
+        include: [{
+          model: LGA,
+          as: 'lgas',
+          required: false,
+        }],
+        order: [['id', 'ASC']],
+      });
+
+      return states.map(state => addTotalField(state, 'totalStatePopulation'));
+    } catch (error) {
+      throw Boom.internal(error);
+    }
   }
 
   static async addState(req, h) {
@@ -36,6 +46,25 @@ export default class StateController {
 
       throw Boom.internal(error);
     }
+  }
+
+  static async updateState(req) {
+    const { name } = req.payload;
+
+    const state = await State.findOne({ where: { id: req.params.id }});
+    if (!state) {
+      return Boom.notFound('State does not exist');
+    }
+
+    const updatedState = await State.update({
+      name: name.toLowerCase()
+    }, {
+      where: { id: req.params.id },
+      returning: true,
+      plain: true
+    });
+
+    return updatedState;
   }
 
   static async deleteState(req) {

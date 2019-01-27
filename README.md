@@ -24,13 +24,20 @@ lga - signifies **local government area**
 
 Request type  | Endpoint                                    | Action
 --------------|---------------------------------------------|--------------------------------------------------
-GET           | /api/countries                              | Get all countries location
-POST          | /api/countries                              | Create a new country location
-DELETE        | /api/countries                              | Delete a country location data
-POST          | /api/countries/id/states                    | Create a new state location
-GET           | /api/countries                              | List all Country locations with their respective State locations including population data
-GET           | /api/states                                 | List all States locations with their respective LGAs all including population data
+**Countries**
+GET           | /api/countries                              | Get all countries with associated states and LGAs population data
+POST          | /api/countries                              | Add a new country location
+PATCH         | /api/countries/id                           | Update a country's name only
+DELETE        | /api/countries                              | Delete a country and associated states and LGAs
+
+**States**
+GET           | /api/states                                 | Get all states with associated LGAs population data
+POST          | /api/countries/id/states                    | Create a new state location associated with a country
+PATCH         | /api/states/id                              | Update a state's name only
+DELETE        | /api/states/id                              | Delete a state and associated LGAs
+
+**LGAs**
 POST          | /api/states/id/lgas                         | Create a new LGA location with population data
-GET           | /api/lgas                                   | List all LGA locations with their population data
+GET           | /api/lgas                                   | List all LGA locations with their population data including their states and country
 PATCH         | /api/lgas/id                                | Update an LGA location's population data
-DELETE        | /api/lgas/id                                | Delete an LGA locations with their population data
+DELETE        | /api/lgas/id                                | Delete an LGA location's with their population data

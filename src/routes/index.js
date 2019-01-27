@@ -4,13 +4,15 @@ import { validateCountry, validateState, validateLGA, validateUpdateLGA } from '
 const {
   getAllCountries,
   addCountry,
-  deleteCountry,
+  updateCountry,
+  deleteCountry
 } = CountryController;
 
 const {
   getAllStates,
   addState,
-  deleteState
+  deleteState,
+  updateState
 } = StateController;
 
 const {
@@ -42,6 +44,17 @@ const routes = [
   },
   {
     path: '/countries/{id}',
+    method: 'PATCH',
+    options: {
+      handler: updateCountry,
+      validate: {
+        payload: validateCountry
+      },
+      description: 'Update a country location',
+    }
+  },
+  {
+    path: '/countries/{id}',
     method: 'DELETE',
     options: {
       handler: deleteCountry,
@@ -66,6 +79,17 @@ const routes = [
         payload: validateState
       },
       description: 'Add a states location',
+    }
+  },
+  {
+    path: '/states/{id}',
+    method: 'PATCH',
+    options: {
+      handler: updateState,
+      validate: {
+        payload: validateState
+      },
+      description: 'Update a states location',
     }
   },
   {

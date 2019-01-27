@@ -6,11 +6,20 @@ const { Country, State, LGA, sequelize } = models;
 
 export default class LGAController {
   static async getAllLGAs() {
-    const states = await LGA.findAll({
-      include: [{ model: State, as: 'state', required: false }],
+    const lgas = await LGA.findAll({
+      include: [
+        {
+          model: State,
+          as: 'state',
+          required: false,
+          include: [
+            { model: Country, as: 'country', required: false }
+          ]
+        }
+      ],
       order: [['id', 'ASC']],
     });
-    return states;
+    return lgas.map(lga => addTotalField(lga, 'totalLGAPopulation'));
   }
 
   static async addLGA(req, h) {
@@ -105,10 +114,15 @@ export default class LGAController {
 
   static async deleteLGA(req) {
     try {
+      const lga = await LGA.findOne({ where: { id: req.params.id } });
+
       const deletionResult = await LGA.destroy({ where: { id: req.params.id } });
       if (!deletionResult) return Boom.notFound('No such LGA exists');
 
-      return 'State successfully deleted.';
+      const state = await LGAController.updateParentLocation(LGA, State, lga.stateId, 'stateId');
+      const country = await LGAController.updateParentLocation(State, Country, state.countryId, 'countryId');
+
+      return { message: 'LGA successfully deleted.', state, country };
     } catch (error) {
       throw Boom.internal(error);
     }

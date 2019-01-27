@@ -1,8 +1,8 @@
-const addTotalField = (payload) => {
+const addTotalField = (payload, fieldName) => {
   const { male, female } = payload.dataValues;
 
   const response = payload;
-  response.dataValues.total = male + female;
+  response.dataValues[fieldName] = male + female;
 
   return response;
 };
