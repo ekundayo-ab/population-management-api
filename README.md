@@ -23,9 +23,9 @@ on the terminal.
 - To run tests do `npm test` or `npm run test`
 
 ### API Endpoints
-lga - signifies **local government area**
+LGA - signifies **Local Government Area**
 
-**Countries**
+#### Countries
 Request type  | Endpoint                                    | Action
 --------------|---------------------------------------------|--------------------------------------------------
 GET           | /api/countries                              | Get all countries with associated states and LGAs population data
@@ -33,7 +33,7 @@ POST          | /api/countries                              | Add a new country 
 PATCH         | /api/countries/id                           | Update a country's name only
 DELETE        | /api/countries                              | Delete a country and associated states and LGAs
 
-**States**
+#### States
 Request type  | Endpoint                                    | Action
 --------------|---------------------------------------------|--------------------------------------------------
 GET           | /api/states                                 | Get all states with associated LGAs population data
@@ -41,7 +41,7 @@ POST          | /api/countries/id/states                    | Create a new state
 PATCH         | /api/states/id                              | Update a state's name only
 DELETE        | /api/states/id                              | Delete a state and associated LGAs
 
-**LGAs**
+#### LGAs
 Request type  | Endpoint                                    | Action
 --------------|---------------------------------------------|--------------------------------------------------
 GET           | /api/lgas                                   | List all LGA locations with their population data including their states and country
